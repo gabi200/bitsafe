@@ -12,7 +12,7 @@ If you run the Python file, you need to have the `cryptography` and `pyperclip` 
   For Microsoft Windows, you can download the executable `BitSafePasswordManager.exe` (you can also find it in Releases) using the following PowerShell command:
   >`Invoke-WebRequest -Uri "https://github.com/gabi200/bitsafe/releases/download/v1.0/BitSafePasswordManager.exe" -OutFile BitSafePasswordManager.exe`
   
-  If you have Python 3 installed, you can also download the file and run it:
+  If you have Python 3 installed, you can also download the `main.py` file and run it:
   
 >`py main.py`
 
@@ -22,4 +22,4 @@ If you run the Python file, you need to have the `cryptography` and `pyperclip` 
  
    If have Python 3 installed run the following command:
    
->`sudo python3 main.py`
+>`sudo python3 BitSafePasswordManager.py`
