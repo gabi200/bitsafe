@@ -1,5 +1,4 @@
-# (c) 2020 Gabi Software - All rights reserved
-# Highly secure software 
+# (c) gabi200 - All rights reserved
 
 import sys
 import os
