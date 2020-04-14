@@ -4,9 +4,11 @@ import sys
 import os
 import base64
 import time
-from os import path
 import platform
+import random
 import getpass
+import pyperclip
+from os import path
 from collections import defaultdict
 from shutil import copyfile
 from cryptography.hazmat.backends import default_backend
@@ -24,6 +26,19 @@ def genkey(salt):
 	)
 	key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf once
 	return key
+
+def genpassword(length):
+	letters = "abcdefghijklmnopqrstuvwxyz"
+	password = ""
+	# x and y are random numbers used for password generation
+	for x in range(length):
+		x = random.randint(0,100)
+		y = random.randint(100, 500)
+		index = random.randint(0, len(letters) - 1)
+		index1 = random.randint(0, len(letters) - 1)
+
+		password += str(x) + letters[index] + letters[index1] + str(y)
+	return password
 
 version = " v1.0.0"
 bar = "=" * 65
@@ -119,7 +134,7 @@ while True:
 		clear()
 		password_dict = defaultdict(dict)
 		print("My Passwords")
-		print("Commands: [add] [view] [delete] [reset] [backup]")
+		print("Commands: [add] [view] [delete] [reset] [backup] [generate]")
 		print(bar)
 		if not path.exists(keypath + "\\securedata.pwd"):
 			file = open(keypath + "\\securedata.pwd","wb")
@@ -294,6 +309,22 @@ while True:
 					print("Error: path does not exist!")
 					input("Press [enter] to continue.")
 					clear()
+		elif command.lower() == "generate":
+				clear()
+				print("Generate password")
+				print(bar)
+				length = input("Enter length (note: it isn't the number of characters, enter any integer): ")
+				password = genpassword(int(length))
+				print(bar)
+				print("Your password is: " + password)
+				choice = input("Do you want to copy it to clipboard? (y/n): ")
+
+				if choice.lower() == "y":
+					pyperclip.copy(password)
+					print("Password copied.")
+				
+				input("Press [enter] to continue.")
+				clear()
 		else:
 			print("Error: invalid command")
 			input("Press [enter] to continue.")
