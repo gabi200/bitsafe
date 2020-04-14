@@ -40,7 +40,7 @@ def genpassword(length):
 		password += str(x) + letters[index] + letters[index1] + str(y)
 	return password
 
-version = " v1.0.0"
+version = " v1.1.0"
 bar = "=" * 65
 password_dict = defaultdict(dict)
 service_name = ""
