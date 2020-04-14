@@ -9,9 +9,17 @@ If you run the Python file, you need to have the `cryptography` and `pyperclip` 
 
 ### Windows
 
-  For Microsoft Windows, you can run the executable `BitSafePasswordManager.exe` or use the following command if you have Python 3 installed:
+  For Microsoft Windows, you can download the executable `BitSafePasswordManager.exe`(you can also find it in Releases) using the following command:
+  >`Invoke-WebRequest -Uri "https://github.com/gabi200/bitsafe/releases/download/v1.0/BitSafePasswordManager.exe" -OutFile BitSafePasswordManager.exe`
+  
+  If you have Python 3 installed, you can also download the file and run it:
+  
 >`py main.py`
 
 ### Linux 
-  For Linux, you need to have Python 3 installed and run the following command:
+  For Linux, you need to download the `main.py` file using the following command:
+ >`wget -O BitSafePasswordManager.py "https://raw.githubusercontent.com/gabi200/bitsafe/master/main.py"`
+ 
+   If have Python 3 installed run the following command:
+   
 >`sudo python3 main.py`
