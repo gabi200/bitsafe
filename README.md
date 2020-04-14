@@ -1,9 +1,11 @@
 # BitSafe Password Manager
-A simple, lightweight, cross-platform and open-source CLI password manager.
+A simple, lightweight, cross-platform and open-source CLI password manager. It can locally store your passwords, generate a random password and backup your data to a local drive.
 
 **The program stores your passwords securely encrypted in the application folder.**
 
 ## How to install
+
+If you run the Python file, you need to have the `cryptography` and `pyperclip` modules installed.
 
 ### Windows
 
