@@ -31,7 +31,7 @@ def genpassword(length):
 	letters = "abcdefghijklmnopqrstuvwxyz"
 	password = ""
 	# x and y are random numbers used for password generation
-	for x in range(length):
+	for i in range(length):
 		x = random.randint(0,100)
 		y = random.randint(100, 500)
 		index = random.randint(0, len(letters) - 1)
@@ -40,7 +40,7 @@ def genpassword(length):
 		password += str(x) + letters[index] + letters[index1] + str(y)
 	return password
 
-version = " v1.1.0"
+version = " v1.1.1"
 bar = "=" * 65
 password_dict = defaultdict(dict)
 service_name = ""
@@ -134,7 +134,7 @@ while True:
 		clear()
 		password_dict = defaultdict(dict)
 		print("My Passwords")
-		print("Commands: [add] [view] [delete] [reset] [backup] [generate]")
+		print("Commands: [add] [view] [delete] [reset] [backup] [generate] [exit]")
 		print(bar)
 		if not path.exists(keypath + "\\securedata.pwd"):
 			file = open(keypath + "\\securedata.pwd","wb")
@@ -325,6 +325,8 @@ while True:
 				
 				input("Press [enter] to continue.")
 				clear()
+		elif command.lower() == "exit":
+			sys.exit()
 		else:
 			print("Error: invalid command")
 			input("Press [enter] to continue.")
