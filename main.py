@@ -48,10 +48,10 @@ index = 0
 auth = False
 
 if platform.system() == "Windows":
-	keypath = "C:\\ProgramData\\BitSafe"
+	keypath = "C:/ProgramData/BitSafe"
 	os.system("title BitSafe Password Manager" + version)
 elif platform.system() == "Linux":
-	keypath = "/home/.bitsafe"
+	keypath = "/usr/bitsafe"
 	sys.stdout.write("\x1b]2;BitSafe Password Manager" + version + "\x07")
 
 def clear():
@@ -69,7 +69,7 @@ input("Press [enter] to continue.")
 
 clear()
 
-if path.exists(keypath + "\\installed.txt"):
+if path.exists(keypath + "/installed.txt"):
 	print("Welcome back!")
 	password_provided = getpass.getpass("Please enter your password: ")
 	new = False
@@ -87,7 +87,7 @@ else:
 		input("Press [enter] to continue.")
 		sys.exit()
 		
-	file = open(keypath + "\\installed.txt","w")
+	file = open(keypath + "/installed.txt","w")
 	file.close()
 	new = True
 
@@ -96,22 +96,22 @@ if new == True:
 	salt = os.urandom(16)
 	key = genkey(salt)
 
-	file0 = open(keypath + "\\salt", 'wb')
+	file0 = open(keypath + "/salt", 'wb')
 	file0.write(salt)
 	file0.close()
 
 	f = Fernet(key)
 	encrypted = f.encrypt("identity_check_9674".encode())
 
-	file = open(keypath + "\\idcheck.key", 'wb')
+	file = open(keypath + "/idcheck.key", 'wb')
 	file.write(encrypted)
 	file.close()
 
-file = open(keypath + "\\salt", 'rb')
+file = open(keypath + "/salt", 'rb')
 salt = file.read() 
 file.close()
 
-file = open(keypath + "\\idcheck.key", 'rb')
+file = open(keypath + "/idcheck.key", 'rb')
 encrypted = file.read() 
 file.close()
 
@@ -136,11 +136,11 @@ while True:
 		print("My Passwords")
 		print("Commands: [add] [view] [delete] [reset] [backup] [generate] [exit]")
 		print(bar)
-		if not path.exists(keypath + "\\securedata.pwd"):
-			file = open(keypath + "\\securedata.pwd","wb")
+		if not path.exists(keypath + "/securedata.pwd"):
+			file = open(keypath + "/securedata.pwd","wb")
 			file.write("default".encode())
 			file.close()
-		file = open(keypath + "\\securedata.pwd", "rb")
+		file = open(keypath + "/securedata.pwd", "rb")
 		data = file.read()
 		file.close()
 
@@ -184,7 +184,7 @@ while True:
 			data_decoded_2 += serv_name + ": " + pwd + ";"
 			data_encrypted = f.encrypt(data_decoded_2.encode())
 
-			file = open(keypath + "\\securedata.pwd", "wb")
+			file = open(keypath + "/securedata.pwd", "wb")
 			file.write(data_encrypted)
 			file.close()
 
@@ -225,10 +225,10 @@ while True:
 				print("Deleting...")
 				time.sleep(1)
 
-				os.remove(keypath + "\\salt")
-				os.remove(keypath + "\\idcheck.key")
-				os.remove(keypath + "\\securedata.pwd")
-				os.remove(keypath + "\\installed.txt")
+				os.remove(keypath + "/salt")
+				os.remove(keypath + "/idcheck.key")
+				os.remove(keypath + "/securedata.pwd")
+				os.remove(keypath + "/installed.txt")
 
 				password_dict = defaultdict(dict)
 				service_name = ""
@@ -260,7 +260,7 @@ while True:
 
 					encrypted = f.encrypt(data_modified.encode())
 
-					file = open(keypath + "\\securedata.pwd", "wb")
+					file = open(keypath + "/securedata.pwd", "wb")
 					file.write(encrypted)
 					file.close()
 					print("Done!")
@@ -280,27 +280,27 @@ while True:
 			if choice.lower() == "export":
 				disk_letter = input("Please enter disk letter where to export: ")
 				print("Exporting...")
-				exportpath = disk_letter.upper() + ":\\BitSafe"
+				exportpath = disk_letter.upper() + ":/BitSafe"
 
 				if not path.exists(exportpath):
 					os.mkdir(exportpath)
 
-				copyfile(keypath + "\\salt", exportpath + "\\salt")
-				copyfile(keypath + "\\idcheck.key", exportpath + "\\idcheck.key")
-				copyfile(keypath + "\\securedata.pwd", exportpath + "\\securedata.pwd")
+				copyfile(keypath + "/salt", exportpath + "/salt")
+				copyfile(keypath + "/idcheck.key", exportpath + "/idcheck.key")
+				copyfile(keypath + "/securedata.pwd", exportpath + "/securedata.pwd")
 
 				print("Done! You can now import the backup on another device!")
 				input("Press [enter] to continue.")
 				clear()
 			elif choice.lower() == "import":
 				disk_letter = input("Please enter disk letter where the backup is located: ")
-				importpath = disk_letter.upper() + ":\\BitSafe"
+				importpath = disk_letter.upper() + ":/BitSafe"
 
 				if path.exists(importpath):
 					print("Importing...")
-					copyfile(importpath + "\\salt", keypath + "\\salt")
-					copyfile(importpath + "\\idcheck.key", keypath + "\\idcheck.key")
-					copyfile(importpath + "\\securedata.pwd", keypath + "\\securedata.pwd")
+					copyfile(importpath + "/salt", keypath + "/salt")
+					copyfile(importpath + "/idcheck.key", keypath + "/idcheck.key")
+					copyfile(importpath + "/securedata.pwd", keypath + "/securedata.pwd")
 
 					print("Done!")
 					input("Press [enter] to continue.")
@@ -330,4 +330,4 @@ while True:
 		else:
 			print("Error: invalid command")
 			input("Press [enter] to continue.")
-			clear()
+			clear() 
